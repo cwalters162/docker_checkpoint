@@ -1,14 +1,9 @@
-// Update with your config settings.
+const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING
 
 module.exports = {
   development: {
-    client: 'postgresql',
-    connection: {
-      host: "172.17.0.2",
-      port: "5432",
-      database: "docker_checkpoint_database",
-      user: "postgres",
-      password: "docker"
-    }
+    client: 'pg',
+    connection: DB_CONNECTION_STRING,
+    acquireConnectionTimeout: 120000
   }
 };
