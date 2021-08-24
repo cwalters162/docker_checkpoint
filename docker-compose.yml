@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  database:
+    image: 'postgres:latest'
+      volume:
+        - ./backend/database:/var/lib/postgresql/data
+    networks:
+      - docker_checkpoint_network
+    environment:
+      POSTGRES_PASSWORD: docker
+      POSTGRES_USER: postgres
+      POSTGRES_DB: docker_checkpoint_database
+
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    networks:
+      - docker_checkpoint_network
+    depends_on:
+      - database
+
+  frontend:
+    build: ./frontend
+      - "3000:3000"
+    networks:
+      - docker_checkpoint_network
+    depends_on:
+      - backend
+
+networks:
+  docker_checkpoint_network:
+    driver: bridge

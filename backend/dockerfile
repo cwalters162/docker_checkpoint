@@ -1,0 +1,6 @@
+FROM node:latest
+COPY . /backend
+WORKDIR /backend
+RUN npm install
+EXPOSE 3001
+CMD npm start
